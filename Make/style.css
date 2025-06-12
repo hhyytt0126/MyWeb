@@ -241,6 +241,15 @@ h1 {
   border-radius: 5px;
 }
 
+.team-project-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(52, 152, 219, 0.08);
+}
 .featured-project {
   background-color: white;
   border-radius: 10px;
