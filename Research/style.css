@@ -125,7 +125,7 @@ h1 {
 }
 
 .research-title {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   margin: 0;
   line-height: 1.4;
 }
@@ -133,6 +133,7 @@ h1 {
 .research-content {
   display: flex;
   padding: 25px;
+  padding-top: 0px;
   gap: 25px;
   align-items: center;
 }
