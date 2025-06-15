@@ -150,10 +150,6 @@ h1 {
   transition: transform 0.3s ease;
 }
 
-.section:hover {
-  transform: translateY(-5px);
-}
-
 .section h2 {
   font-size: 1.8rem;
   margin-bottom: 20px;
