@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>松浦 隼大 | My Profile</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css"> <!-- 分離したCSSファイルを読み込み -->
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3JZP3N6T5Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-3JZP3N6T5Y');
-</script>
+    <!-- Font Awesome & CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics（head 内に配置） -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3JZP3N6T5Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-3JZP3N6T5Y');
+    </script>
+</head>
+
 <body>
     <header>
         <nav>
@@ -31,7 +34,10 @@
     <div class="container">
         <section class="hero">
             <div class="profile-container">
-                <img src="./Pictures/portfolio.jpg" alt="松浦 隼大" class="profile-image">
+                <!-- clickable-image クラスを追加し、インライン onclick を削除 -->
+                <img src="./Pictures/portfolio.jpg"
+                     alt="松浦 隼大"
+                     class="profile-image clickable-image">
                 <div class="profile-info">
                     <h1>松浦 隼大 / Hayato Matsuura</h1>
                     <p class="title">兵庫県立大学大学院 工学研究科 電子情報工学専攻 修士1回生</p>
@@ -41,22 +47,28 @@
             <div class="sections">
                 <div class="section">
                     <h2>News</h2>
+
                     <div class="news-item">
                         <div class="news-date">2024.11</div>
                         <div class="news-content">
-                            <a href="https://sigmr.vrsj.org/apmar2024/">APMAR</a>でBest Presentation Awardをいただきました
+                            <a href="https://sigmr.vrsj.org/apmar2024/">APMAR</a>で Best Presentation Award をいただきました
                         </div>
                     </div>
+
                     <div class="news-item">
                         <div class="news-date">2025.5</div>
                         <div class="news-content">
                             兵庫県立大学理学部キャンパスの学園祭であるテクノフェスタで『AIチェキ』を販売しました
                         </div>
                     </div>
+
                     <div class="news-item">
                         <div class="news-date">2025.5</div>
                         <div class="news-content">
-                            ストレスを可視化できるフグ型膨張オブジェが<a href="https://talent.supporterz.jp/events/af94b814-3a20-48d4-9d31-922f4dd01a5d/">技育博2025Vol.2</a>で株式会社ゆめみ賞をいただきました
+                            ストレスを可視化できるフグ型膨張オブジェが
+                            <a href="https://talent.supporterz.jp/events/af94b814-3a20-48d4-9d31-922f4dd01a5d/">
+                                技育博2025 Vol.2
+                            </a>で株式会社ゆめみ賞をいただきました
                         </div>
                     </div>
                 </div>
@@ -64,27 +76,68 @@
                 <div class="section">
                     <h2>Contact</h2>
                     <div class="contact-info">
-                        <p>matsuurahayato0126 [at] icloud.com</p>
+                        <i class="fas fa-envelope"></i>
+                        <p>matsuurahayato0126&nbsp;[at]&nbsp;icloud.com</p>
                     </div>
-
                 </div>
             </div>
         </section>
     </div>
 
+    <!-- 画像モーダル -->
+    <div id="image-modal" class="image-modal" aria-hidden="true">
+        <span class="image-close" aria-label="画像を閉じる">&times;</span>
+        <img class="image-modal-content" id="full-image" alt="">
+    </div>
 
-
+    <!-- メインスクリプト -->
     <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        /* ── 1. ヘッダーのスクロール影 ─────────────────── */
+        const header = document.querySelector('header');
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-            }
+            header.style.boxShadow = window.scrollY > 50
+              ? '0 5px 15px rgba(0,0,0,0.1)'
+              : '0 2px 10px rgba(0,0,0,0.1)';
         });
+
+        /* ── 2. 画像モーダル機能 ──────────────────────── */
+        const imageModal = document.getElementById('image-modal');
+        const modalImg   = document.getElementById('full-image');
+        const closeBtn   = document.querySelector('.image-close');
+
+        // a) クリック可能画像を登録
+        document.querySelectorAll('.clickable-image').forEach(img => {
+            img.addEventListener('click', () => openModal(img.src));
+        });
+
+        // b) モーダルを開く
+        function openModal(src) {
+            modalImg.src         = src;
+            imageModal.style.display = 'flex';
+            imageModal.setAttribute('aria-hidden', 'false');
+        }
+
+        // c) 閉じるボタン
+        closeBtn.addEventListener('click', closeModal);
+
+        // d) 背景クリックで閉じる
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) closeModal();
+        });
+
+        // e) Esc キーで閉じる
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function closeModal() {
+            imageModal.style.display = 'none';
+            imageModal.setAttribute('aria-hidden', 'true');
+            modalImg.removeAttribute('src');
+        }
+    });
     </script>
-
-
 </body>
 </html>
