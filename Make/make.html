@@ -28,7 +28,7 @@
         <div class="projects-grid">
             <!-- プロジェクトカード -->
             <div class="project-card">
-                <img src="../Pictures/run_game.png" alt="無限ランゲーム" class="project-image" />
+                <img src="../Pictures/run_game.png" alt="無限ランゲーム" class="project-image" onclick="showImageModal(this.src)"/>
                 <div class="project-content">
                     <h3 class="project-title">無限ランゲーム</h3>
                     <p class="project-description">VRならではの要素を加えたかったので, 実際の体の動きとゲーム内の動きを同期させています.</p>
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="project-card">
-                <img src="../Pictures/frielen.png" alt="花畑を出す魔法" class="project-image" />
+                <img src="../Pictures/frielen.png" alt="花畑を出す魔法" class="project-image" onclick="showImageModal(this.src)"/>
                 <div class="project-content">
                     <h3 class="project-title">花畑を出す魔法</h3>
                     <p class="project-description">某アニメの主人公が一番好きな魔法の再現です．魔法の杖を振ることで花が咲きます.また、魔法の杖はBlenderで作成しました.</p>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="project-card">
-                <img src="../Pictures/dokodemo.png" alt="どこかにいけそうなドア" class="project-image" />
+                <img src="../Pictures/dokodemo.png" alt="どこかにいけそうなドア" class="project-image" onclick="showImageModal(this.src)"/>
                 <div class="project-content">
                     <h3 class="project-title">どこかにいけそうなドア</h3>
                     <p class="project-description">猫型のロボットがくれそうなドアです. Unityの深度バッファーを変更することで作りました．</p>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="project-card">
-                <img src="../Pictures/arrow.png" alt="MR的あて" class="project-image" />
+                <img src="../Pictures/arrow.png" alt="MR的あて" class="project-image" onclick="showImageModal(this.src)" />
                 <div class="project-content">
                     <h3 class="project-title">MR的あて</h3>
                     <p class="project-description">シンプルな的あてを作成しました．的は，壁や天井, 床から飛び出してきているように見えます. </p>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="project-card">
-                <img src="../Pictures/interactive.png" alt="インタラクティブな部屋" class="project-image" />
+                <img src="../Pictures/interactive.png" alt="インタラクティブな部屋" class="project-image" onclick="showImageModal(this.src)"/>
                 <div class="project-content">
                     <h3 class="project-title">インタラクティブな部屋</h3>
                     <p class="project-description">物体をつかめたり，窓を割ったりすることが出来る部屋を作成しました. オブジェクトは銃以外, 全て自作しました. </p>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="project-card">
-                <img src="../Pictures/warikan.png" alt="割り勘精算アプリ" class="project-image" />
+                <img src="../Pictures/warikan.png" alt="割り勘精算アプリ" class="project-image" onclick="showImageModal(this.src)"/>
                 <div class="project-content">
                     <h3 class="project-title">割り勘精算アプリ</h3>
                     <p class="project-description">Boltを使用して作成しました. どこか旅行に行った日の一番最後の精算に便利です. </p>
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="project-card">
-                <img src="../Pictures/3d_card_generator.png" alt="3Dカードジェネレータ" class="project-image" />
+                <img src="../Pictures/3d_card_generator.png" alt="3Dカードジェネレータ" class="project-image" onclick="showImageModal(this.src)"/>
                 <div class="project-content">
                     <h3 class="project-title">3Dカードジェネレータ</h3>
                     <p class="project-description">2枚の画像の差分から3Dのカードを作成できるWebです.(ローカル環境でのみ動作可能) </p>
@@ -138,6 +138,10 @@
         </div>
     </div>
 
+    <div id="image-modal" class="image-modal">
+        <span class="image-close">&times;</span>
+        <img class="image-modal-content" id="modal-img">
+    </div>
     <script>
         // スクロール時のヘッダー効果
         window.addEventListener('scroll', () => {
@@ -153,7 +157,10 @@
         const modal = document.getElementById('video-modal');
         const videoFrame = document.getElementById('youtube-frame');
         const closeButton = document.querySelector('.close-button');
-
+        // 画像モーダル機能
+        const imageModal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const imageClose = document.querySelector('.image-close');
         // 各プロジェクトのYouTube動画ID（実際のYouTube動画IDに置き換えてください）
         const videoIds = {
             'run-game': '-7rIjIq5dNA',       // 無限ランゲーム
@@ -181,6 +188,22 @@
             if (event.target == modal) {
                 modal.style.display = 'none';
                 videoFrame.src = '';
+            }
+        }
+
+        
+        function showImageModal(src) {
+            modalImg.src = src;
+            imageModal.style.display = "flex";
+        }
+
+        imageClose.onclick = function() {
+            imageModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == imageModal) {
+                imageModal.style.display = "none";
             }
         }
     </script>
