@@ -261,7 +261,7 @@ h1 {
 .featured-project h2 {
   font-size: 1.8rem;
   margin-bottom: 20px;
-  color: var(--primary-color);
+  color: black;
   position: relative;
   padding-bottom: 10px;
 }
@@ -273,7 +273,7 @@ h1 {
   bottom: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--accent-color);
+  background-color: var(--primary-color);
 }
 
 .featured-content {
