@@ -234,6 +234,7 @@ h1 {
 }
 
 .modal-content {
+  z-index: 3001;
   position: relative;
   width: 100%;
   max-width: 800px;

@@ -153,6 +153,8 @@
             }
         });
 
+        
+
         // ビデオモーダル関連
         const modal = document.getElementById('video-modal');
         const videoFrame = document.getElementById('youtube-frame');
@@ -189,6 +191,10 @@
                 modal.style.display = 'none';
                 videoFrame.src = '';
             }
+
+            if (event.target == imageModal) {
+                imageModal.style.display = "none";
+            }
         }
 
         
@@ -199,12 +205,6 @@
 
         imageClose.onclick = function() {
             imageModal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == imageModal) {
-                imageModal.style.display = "none";
-            }
         }
     </script>
 </body>
